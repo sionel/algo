@@ -7,11 +7,21 @@ function solution(n, works) {
   while(n--){
       if(works[process] === 0) return 0
       works[process]--
-      if(process === works.length -1 || works[process] === works[process+1]) process =0
+      if(process === works.length -1 || works[process] === works[process+1]) process = 0
       else if(works[process] < works[process+1] ) process++
       // else if(process && works[process-1] > works[process]) process--
   }
   
   return works.reduce((fatigue,cur)=>fatigue+(cur**2),0);
 }
-//7, [10, 5, 7], 75
+/* 
+9 8 8 7
+8 8 8 7
+7 8 8 7
+7 7 8 7
+7 7 7 7
+6 7 7 7
+6 6 7 7
+6 6 6 7
+6 6 6 6
+*/
