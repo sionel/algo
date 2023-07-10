@@ -7,7 +7,7 @@ let output = '';
 input.forEach(input => {
   if (input.includes('push_front')) {
     //splice로 제일 앞에 추가한다.
-    deque.splice(0, 0, input.split(' ')[1]);
+    deque.unshift(input.split(' ')[1]);
   }
   if (input.includes('push_back')) {
     //push로 제일 뒤에 추가한다.
