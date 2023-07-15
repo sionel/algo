@@ -16,3 +16,4 @@ for (let i = 0; i < arr.length; i++) {
 
 if(result >= M) result %= M;
 console.log(Number(result));
+//https://vscode.dev/profile/github/7ac0659b4dc22231adeaba18649b16cc
