@@ -29,18 +29,18 @@ for (let i = 0; i < cases; i++) {
       }
     }
 
-    let result = "["
+    let result = []
     if (isStart) {
       for (let j = start; j <= end; j++) {
-        result += arr[j] + ","
+        result.push(arr[j])
       }
     } else {
       for (let j = end; j >= start; j--) {
-        result += arr[j] + ","
+        result.push(arr[j])
       }
     }
 
-    console.log(result.length === 1 ? "[]" : result.slice(0, -1) + "]")
+    console.log(JSON.stringify(result))
   }
   catch (error) {
     console.log("error");
