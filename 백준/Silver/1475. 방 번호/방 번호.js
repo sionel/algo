@@ -1,30 +1,32 @@
+const fs = require("fs");
 
-let n = 0 
-const reader = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-reader.on('line', (line) => {
-  n = line
-  reader.close()
-});
-reader.on('close', () => {
-  solution(n)
-  process.exit();
-});
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
+const input = (() => {
+  const stdin = fs
+    .readFileSync(filePath)
+    .toString()
+    .replaceAll("\r", "")
+    .split("\n");
+  let ln = 0;
+  return () => stdin[ln++];
+})();
 
-const solution = (n) => {
-  const arr = Array(10).fill(0)
-  const temp = [...n]
-  let max = 0
-  temp.forEach(e=>{
-    if(e === '6' || e === '9'){
-      arr[6]++
-      max = Math.max(max,Math.ceil(arr[6]/2))
-    }else {
-      arr[+e]++
-      max = Math.max(max,arr[e])
-    }
-  })
-  console.log(max)
+let n = input()
+const obj = {
+  0:0,
+  1:0,
+  2:0,
+  3:0,
+  4:0,
+  5:0,
+  6:0,
+  7:0,
+  8:0,
+  9:0
 }
+Array(...n).forEach(e=>obj[e]++)
+let max = 0
+for(let i = 0 ; i < 9 ; i++){
+  max = i === 6 ?  Math.max(max , Math.ceil((obj[i] + obj[9])/2))  : Math.max(max , obj[i])
+}
+console.log(max)
