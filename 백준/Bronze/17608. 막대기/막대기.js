@@ -7,26 +7,24 @@ const input = (() => {
     .toString()
     .replaceAll("\r", "")
     .split("\n");
+
   let ln = 0;
   return () => stdin[ln++];
 })();
 
-let n = input()
-const obj = {
-  0:0,
-  1:0,
-  2:0,
-  3:0,
-  4:0,
-  5:0,
-  6:0,
-  7:0,
-  8:0,
-  9:0
+const n = Number(input())
+const stack = []
+
+for(let i = 0 ; i < n ; i++){
+  stack.push(Number(input()))
 }
-Array(...n).forEach(e=>obj[e]++)
-let max = 0
-for(let i = 0 ; i < 9 ; i++){
-  max = i === 6 ?  Math.max(max , Math.ceil((obj[i] + obj[9])/2))  : Math.max(max , obj[i])
+let count = 0
+let temp = 0
+while(stack.length){
+  const value = stack.pop()
+  if(value > temp){
+    count++
+    temp = value
+  }
 }
-console.log(max)
+console.log(count);
