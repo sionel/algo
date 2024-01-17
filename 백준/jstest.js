@@ -1,50 +1,61 @@
 const fs = require("fs");
 
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-const input = (() => {
-  const stdin = fs.readFileSync(filePath).toString().trim().split("\n");
-  let ln = 0;
-  return () => stdin[ln++];
-})();
+const input = fs
+  .readFileSync(filePath)
+  .toString()
+  .replace("\r", "")
+  .split("\n");
 
-const [N, M] = input().split(" ").map(Number);
+const [m, n] = input[0].split(" ").map(Number);
 
-const tree = Array.from({ length: N + 1 }, (_, i) => i);
-let result = 0;
-// console.log(tree);
-const find = (x) => {
-  if (tree[x] === x) return x;
-  return (tree[x] = find(tree[x]));
-};
-const union = (a, b) => {
-  const x = find(a);
-  const y = find(b);
-};
-for (let i = 0; i < M; i++) {
-  const [a, b] = input().split(" ").map(Number);
-  if (find(a) === find(b)) result++;
-  else {
+const surveys = Array.from({ length: n }, () =>
+  Array.from({ length: m }, () => 0)
+);
+
+for (let i = 1; i <= n; i++) {
+  const arr = input[i].split(" ").map(Number);
+  arr.forEach((e, idx) => {
+    surveys[i - 1][idx] = e ? e : 501;
+  });
+}
+
+const prefer = Array.from({ length: m }, () => Array.from({ length: m }, () => 0))
+
+for (let k = 0; k < n; k++) {
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < m; j++) {
+      surveys[k][i] < surveys[k][j] && prefer[i][j]++
+    }
   }
 }
 
-// const dfs = (n) => {
-//   const stack = [[0, n]];
-//   while (stack.length) {
-//     const [parent, child] = stack.pop();
-//     if (visit[start]) result++;
-//     else {
-//       visit[start] = true;
-//       const arr = [...obj[start]];
-//       stack.push(...obj[start]);
-//     }
-//   }
-// };
+console.log(prefer.map(e=>e.join(' ')).join('\n'));
 
-// for (let i = 1; i <= N; i++) {
-//   if (!visit[i]) {
-//     dfs(i);
-//     result++;
+// const result = Array.from({ length: m }, () => 0)
+
+// for (let i = 0; i < m; i++) {
+//   let count = 0
+//   for (let j = 0; j < m; j++) {
+//     prefer[i][j] >= prefer[j][i] && count ++
 //   }
+//   result[i] = count
 // }
 
-// console.log(result - 1);
+// // const preference= Array.from({ length: m }, () => Array.from({ length: m }, () => 0))
+
+// // Floyd-Warshall 알고리즘을 사용하여 최대 선호 지수를 계산
+// for (let k = 0; k < m; k++) {
+//     for (let i = 0; i < m; i++) {
+//         for (let j = 0; j < m; j++) {
+//             if (i != j && i != k && j != k) {
+//               prefer[i][j] = Math.max(prefer[i][j], Math.min(prefer[i][k], prefer[k][j]));
+//             }
+//         }
+//     }
+// }
+
+// console.log(prefer.map(e=>e.join(' ')).join('\n'));
+
+
+// console.log(result.map((e,i)=>[e,i+1]).filter(e=>e[0]===max).map(e=>e[1]).join(' '));

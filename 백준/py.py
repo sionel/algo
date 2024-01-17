@@ -1,13 +1,29 @@
-num_student = int(input())
-student_list = []
+from collections import deque
 
-for _ in range(num_student):
-    weight, height = map(int, input().split())
-    student_list.append((weight, height))
+# sys.stdin 대신에 input.txt 파일을 열어서 읽기
+with open("input.txt", "r") as f:
+    n, m = map(int, f.readline().split())
 
-for i in student_list:
-    rank = 1
-    for j in student_list:
-        if i[0] < j[0] and i[1] < j[1]:
-                rank += 1
-    print(rank, end = " ")
+    graph = [[] for _ in range(n+1)]
+    inDegree = [0 for _ in range(n+1)]
+    queue = deque()
+    answer = []
+
+    for i in range(m):
+        a, b = map(int, f.readline().rstrip().split())
+        graph[a].append(b)
+        inDegree[b] += 1
+
+    for i in range(1, n+1):
+        if inDegree[i] == 0:
+            queue.append(i)
+
+    while queue:
+        tmp = queue.popleft()
+        answer.append(tmp)
+        for i in graph[tmp]:
+            inDegree[i] -= 1
+            if inDegree[i] == 0:
+                queue.append(i)
+
+    print(*answer)
