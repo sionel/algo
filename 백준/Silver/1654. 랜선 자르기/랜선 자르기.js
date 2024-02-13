@@ -27,19 +27,19 @@ const solution = (n, numbers) => {
   numbers.sort((a, b) => b-a)
     let min = 0
     let max = numbers[0]
-  let pivot = parseInt(numbers[numbers.length-1])
+  let pivot = Math.floor(numbers[numbers.length-1])
   while(true){
     let count = 0 
     numbers.forEach(e=>{
-        count += parseInt(e/pivot)
+        count += Math.floor(e/pivot)
     })
     if(count >= n){
         min = pivot
-        pivot = parseInt((max+pivot)/2)
+        pivot = Math.floor((max+pivot)/2)
         if(min === pivot) return pivot
     }else if(count < n) {
         max = pivot
-        pivot = parseInt((min+pivot)/2)
+        pivot = Math.floor((min+pivot)/2)
     }
   }
 }
