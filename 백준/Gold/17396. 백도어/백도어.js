@@ -92,7 +92,7 @@ const dijkstra = (start) => {
   heap.push({ cost: 0, point: start });
   while (!heap.isEmpty()) {
     const { cost, point } = heap.pop();
-    if (line[point] < cost) continue;
+    if (line[point] < cost) continue; // 이미 더 작은 값이 있으면 패스 시간초과를 막는 제일 중요한 코드
     for (let [aCost, aPoint] of arr[point]) {
       const total = aCost + cost;
       if (total < line[aPoint]) {
