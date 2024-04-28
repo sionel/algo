@@ -8,6 +8,20 @@ const sudoku = fs
   .replaceAll("\r", "")
   .split("\n")
   .map((s) => s.split("").map(Number));
+/* 
+const input = fs.readFileSync(filePath).toString().replaceAll('\r\n', '');
+
+const numToBoard = (str) => {
+  const board = [];
+  for (let i = 0; i < 9; i++) {
+    board.push(str.slice(i * 9, (i + 1) * 9).split("").map(Number));
+  }
+  return board;
+}
+
+const sudoku = numToBoard(input);
+*/
+
 
 
 function check(x, y, num) {
