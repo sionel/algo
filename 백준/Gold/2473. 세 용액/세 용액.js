@@ -9,7 +9,7 @@ const input = fs
 
 
 const n = Number(input[0])
-const arr = input[1].split(' ').map(BigInt)
+const arr = input[1].split(' ').map(Number)
 arr.sort((a, b) => a > b ? 1 : -1)
 let ans = Infinity;
 const ansArr = Array.from({ length: 3 }, () => 0);
