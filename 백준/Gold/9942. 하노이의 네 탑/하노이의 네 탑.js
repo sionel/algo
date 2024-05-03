@@ -4,7 +4,7 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
 const input = fs
   .readFileSync(filePath)
   .toString()
-  .trim()
+  .trim() // << 뻐킹 트림
   .replace("\r", "")
   .split("\n");
 
