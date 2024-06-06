@@ -1,10 +1,15 @@
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./dev/stdin";
-const inputs = fs.readFileSync(filePath).toString().replaceAll("\r", "").trim().split("\n");
+const inputs = fs
+  .readFileSync(filePath)
+  .toString()
+  .replaceAll("\r", "")
+  .trim()
+  .split("\n");
 
 const [C, N] = inputs[0].split(" ").map(Number);
 const arr = inputs.slice(1).map((str) => str.split(" ").map(Number));
-const MAX = 1100;
+const MAX = 1098;
 
 const dp = Array(MAX).fill(Infinity);
 dp[0] = 0;
