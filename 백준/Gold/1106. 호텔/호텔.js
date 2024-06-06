@@ -4,7 +4,7 @@ const inputs = fs.readFileSync(filePath).toString().replaceAll("\r", "").trim().
 
 const [C, N] = inputs[0].split(" ").map(Number);
 const arr = inputs.slice(1).map((str) => str.split(" ").map(Number));
-const MAX = 1101;
+const MAX = 1100;
 
 const dp = Array(MAX).fill(Infinity);
 dp[0] = 0;
