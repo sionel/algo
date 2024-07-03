@@ -14,10 +14,7 @@ const union = (a,b) => {
     const y = find(b)
     if(x !== y) tree[y] = x
 }
-const find = (a) => {
-    if(tree[a] === a) return a
-    return tree[a] = find(tree[a])
-}
+const find = (a) => tree[a] === a ? a : tree[a] = find(tree[a])
 
 lines.sort((a,b)=>a[2]-b[2])
 
