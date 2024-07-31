@@ -10,11 +10,12 @@ let c = Number(input[2]);
 for (let i = 0; i < arr.length; i++) {
 	let j = arr.length;
 	while (true) {
-		if (i === arr.indexOf(Math.max(...arr.slice(i, j)))) {
+    const maxPosition = arr.indexOf(Math.max(...arr.slice(i, j)));
+		if (i === maxPosition) {
 			break;
 		} else {
-			if (arr.indexOf(Math.max(...arr.slice(i, j))) - i <= c) {
-				let maxIdx = arr.indexOf(Math.max(...arr.slice(i, j)));
+			if (maxPosition - i <= c) {
+				let maxIdx = maxPosition;
 				c -= maxIdx - i;
 				for (let k = maxIdx - 1; k >= i; k--) {
 					[arr[k], arr[k + 1]] = [arr[k + 1], arr[k]];
