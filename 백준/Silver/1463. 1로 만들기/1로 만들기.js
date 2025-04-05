@@ -1,19 +1,22 @@
-const fs = require("fs");
-//"./input.txt , /dev/stdin"
-let input = fs.readFileSync('/dev/stdin').toString().trim()
-input = Number(input)
+const fs = require('fs');
+const filePath = process.platform === "linux" ? "/dev/stdin" : "./dev/stdin";
+const input = fs.readFileSync(filePath).toString().trim().split("\n");
 
-const dp = Array(1000001).fill(Infinity)
-let index = 1
-dp[0]=0
-dp[1]=0
-while (true) {
-  if(index === input) {
-    console.log(dp[input]);
-    break
-  }
-  dp[index + 1] = Math.min(dp[index] + 1, dp[index + 1])
-  dp[index * 2] = Math.min(dp[index] + 1, dp[index * 2])
-  dp[index * 3] = Math.min(dp[index] + 1, dp[index * 3])
-  index++
+let n = Number(input);
+let arr = Array(n+1).fill(0);
+
+for(let i = 2; i<=n;i++){
+    arr[i] = arr[i-1] + 1;
+
+    if(i%2===0){
+        arr[i]=Math.min(arr[i],arr[i/2]+1);
+    }
+    
+    if(i%3===0){
+        arr[i]=Math.min(arr[i],arr[i/3]+1);
+    }
+
+
 }
+
+console.log(arr[n]);
